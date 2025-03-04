@@ -23,10 +23,17 @@ endif(ZLIB_FOUND)
 
 target_link_libraries(utils lbfgsb sprng)
 
-add_executable(decentTree
-  decenttree.cpp
-  starttree.cpp bionj.cpp bionj2.cpp
-  gzstream.cpp progress.cpp operatingsystem.cpp)
+##################################################################
+# Whether to build the decenttree executable file (default: ON)
+##################################################################
+option(BUILD_DECENTTREE "build decenttree" ON)
+
+if(BUILD_DECENTTREE)
+  add_executable(decentTree
+    decenttree.cpp
+    starttree.cpp bionj.cpp bionj2.cpp
+    gzstream.cpp progress.cpp operatingsystem.cpp)
+endif(BUILD_DECENTTREE)
 
 if(ZLIB_FOUND)
   target_link_libraries(decentTree ${ZLIB_LIBRARIES})
